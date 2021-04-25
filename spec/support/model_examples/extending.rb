@@ -53,6 +53,26 @@ shared_examples_for 'extending a given api template' do
     end
   end
 
+  describe 'extending two templates' do
+    subject(:response) { @luke.as_api_response(:age_and_first_name_and_full_name) }
+
+    it 'returns a hash' do
+      expect(response).to be_kind_of(Hash)
+    end
+
+    it 'returns the correct number of fields' do
+      expect(response).to have(3).keys
+    end
+
+    it 'returns all specified fields' do
+      expect(response.keys.sort_by(&:to_s)).to eql([:first_name, :full_name, :age].sort_by(&:to_s))
+    end
+
+    it 'returns the correct values for the specified fields' do
+      expect(response.values.sort_by(&:to_s)).to eql([@luke.first_name, @luke.full_name, @luke.age].sort_by(&:to_s))
+    end
+  end
+
   describe 'and inherit a field using another template name' do
     before(:each) do
       Task.acts_as_api

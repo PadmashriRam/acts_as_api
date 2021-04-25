@@ -16,6 +16,7 @@ describe 'Models', type: :model do
     it_supports 'conditional unless statements'
     it_supports 'acts_as_api is enabled'
     it_supports 'extending a given api template'
+    it_supports 'extending two templates'
     it_supports 'calling a method in the api template'
     it_supports 'renaming'
     it_supports 'listing attributes in the api template'

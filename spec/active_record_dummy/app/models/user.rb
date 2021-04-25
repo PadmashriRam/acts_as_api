@@ -34,6 +34,11 @@ class User < ActiveRecord::Base
     t.remove :last_name
   end
 
+  api_accessible :age_and_first_name_and_fullname, extend: [:with_former_value, :rename_full_name] do |t|
+    t.add :age
+    t.remove :last_name
+  end
+
   api_accessible :calling_a_proc do |t|
     t.add proc { |model| model.full_name.upcase }, as: :all_caps_name
     t.add proc { |_| Time.now.class.to_s }, as: :without_param
